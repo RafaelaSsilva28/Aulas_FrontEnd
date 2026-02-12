@@ -35,11 +35,7 @@ const Aula05_Exercicio = () => {
       <hr />
       <p>EVENTO - onKeyDown</p>
       <input type="text" onKeyDown={(event) => console.log(event.key)} />
-        <hr />
-        <p></p>
-        <button>
-            
-        </button>
+
     </div>
   );
 };
