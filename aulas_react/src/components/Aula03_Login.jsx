@@ -1,21 +1,34 @@
-
+import { useState } from "react"
 const Aula03_Login = () => {
+
+        const [ email, setEmail ] = useState('')    //variavel, função e estado inicial
+        const [ senha, setSenha ] = useState('')    //variavel, função e estado inicial
+        const [ mensagem, setMensagem ] = useState('')    //variavel, função e estado inicial
+    
+        function validar(){
+            setMensagem(senha && email)
+        }if (email && senha == 'senai@senai.br', 123 ){
+                mensagem
+        }
+
+
     return (
         <div style={estilos.loginConteudo}>
                 <img style={estilos.logo} src="https://tecservice.com.br/wp-content/uploads/2024/05/senai-logo.jpg"></img>
                 <h2 style={estilos.tituloLogin}>Login</h2>
 
             <div style={estilos.grupoInput}>
-                 <label style={estilos.label}>Email</label>
-                 <input type='text' placeholder='Digite seu email' style={estilos.input}></input>
+                 <label style={estilos.label}  >Email</label>
+                 <input type='text' placeholder='Digite seu email' style={estilos.input}  onChange={ (event) => setEmail(event.target.value) } value={email}></input>
             </div>
 
             <div style={estilos.grupoInput}>
                  <label style={estilos.label}>Senha</label>
-                 <input type='password' placeholder='Digite sua senha' style={estilos.input}></input>
+                 <input type='password' placeholder='Digite sua senha' style={estilos.input}  onChange={ (event) => setSenha(event.target.value) } value={senha}></input>
+                 <p  onChange={ (event) => setMensagem(event.target.value) } value={mensagem}></p>
             </div>
 
-            <button style={estilos.botao}>Entrar</button>
+            <button style={estilos.botao} onClick={validar}>Entrar</button>
 
         </div>
         
