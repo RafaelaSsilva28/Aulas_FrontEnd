@@ -8,7 +8,7 @@ const Aula03_Login = () => {
         function validar(){
             setMensagem(senha && email)
         }if (email && senha == 'senai@senai.br', 123 ){
-                mensagem
+                setMensagem(mensagem = 'Login bem sucedido')
         }
 
 
