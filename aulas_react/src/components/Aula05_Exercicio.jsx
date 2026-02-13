@@ -27,12 +27,11 @@ const Aula05_Exercicio = () => {
       <input
         onChange={(event) => console.log(event.target.value)} type="text" placeholder="Digite algo..."
       />
-      <hr />
+      
       <p>EVENTO - onMouseEnter & onMouseLeave</p>
       <p onMouseEnter={entradaMouse} onMouseLeave={saidaMouse}>
         .
       </p>
-      <hr />
       <p>EVENTO - onKeyDown</p>
       <input type="text" onKeyDown={(event) => console.log(event.key)} />
 

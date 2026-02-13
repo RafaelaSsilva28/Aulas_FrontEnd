@@ -3,6 +3,7 @@ import Aula02 from "./components/Aula02";
 import Aula03 from "./components/Aula03";
 import Aula04 from "./components/Aula04";
 import Aula05 from "./components/Aula05";
+import Aula06 from "./components/Aula06";
 import Cabecalho from "./components/Cabecalho";
 
 import { estilos } from "./style/Estilos";
@@ -20,6 +21,7 @@ const App = () => {
           <Aula03 />
           <Aula04 />
           <Aula05 />
+          <Aula06 />
         </div>
       </main>
     </div>
