@@ -6,6 +6,13 @@ const Aula06_Placar = () => {
   const [contadorZ, setContadorZ] = useState(0);
   const [contadorS, setContadorS] = useState(6);
 
+  function botaoZerar(){
+    setContador(0)
+    setContador2(0)
+    setContadorZ(0)
+    setContadorS(0)
+  }
+
   return (
     <div>
       <h2>Placar Eletrônico</h2>
@@ -20,6 +27,8 @@ const Aula06_Placar = () => {
       <h4>{contador2}</h4>
       <button onClick={() => setContador2(contador2 + 1)}>+1 Ponto</button>
             <hr />
+
+
       <div>
         <h4>BASQUETE</h4>
         <h3> Time 1 </h3>
@@ -33,6 +42,8 @@ const Aula06_Placar = () => {
                   <button onClick={() => setContadorS(contadorS + 1)}>+1 Ponto</button>
                   <button onClick={() => setContadorS(contadorS + 2)}>+2 Ponto</button>
                   <button onClick={() => setContadorS(contadorS + 3)}>+3 Ponto</button>
+
+                <button onClick={botaoZerar}>ZERAR</button>
 
       </div>
     </div>

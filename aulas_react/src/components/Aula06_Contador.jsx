@@ -7,7 +7,7 @@ const Aula06_Contador = () => {
     function botaoDiminuir(){
         setContador(contador - 1)
     }if(contador < 0){
-        setContador(contador <= 0)
+        setContador(0)
     }
 
     return(

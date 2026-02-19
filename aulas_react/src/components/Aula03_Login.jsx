@@ -5,10 +5,13 @@ const Aula03_Login = () => {
         const [ senha, setSenha ] = useState('')    //variavel, função e estado inicial
         const [ mensagem, setMensagem ] = useState('')    //variavel, função e estado inicial
     
-        function validar(){
+        function botaoEntrar(){
             setMensagem(senha && email)
-        }if (email && senha == 'senai@senai.br', 123 ){
-                setMensagem(mensagem = 'Login bem sucedido')
+        if (email == 'senai@senai.br' && senha == '123' ){
+            setMensagem(' ✅ Login bem sucedido')
+        }else {
+            setMensagem('❌Email ou senha incorreto❌')
+        }
         }
 
 
@@ -19,16 +22,19 @@ const Aula03_Login = () => {
 
             <div style={estilos.grupoInput}>
                  <label style={estilos.label}  >Email</label>
-                 <input type='text' placeholder='Digite seu email' style={estilos.input}  onChange={ (event) => setEmail(event.target.value) } value={email}></input>
+                 <input type='text' placeholder='Digite seu email' style={estilos.input}  
+                 onChange={ (event) => setEmail(event.target.value) } value={email}/>
             </div>
 
             <div style={estilos.grupoInput}>
                  <label style={estilos.label}>Senha</label>
-                 <input type='password' placeholder='Digite sua senha' style={estilos.input}  onChange={ (event) => setSenha(event.target.value) } value={senha}></input>
-                 <p  onChange={ (event) => setMensagem(event.target.value) } value={mensagem}></p>
+                 <input type='password' placeholder='Digite sua senha' style={estilos.input} 
+                  onChange={ (event) => setSenha(event.target.value) } value={senha}/>
+
             </div>
 
-            <button style={estilos.botao} onClick={validar}>Entrar</button>
+            <button onClick={botaoEntrar} style={estilos.botao} >Entrar</button>
+                             <p style={{fontStyle: 'bold'}} > {mensagem}</p>
 
         </div>
         
