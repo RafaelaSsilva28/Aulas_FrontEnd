@@ -1,0 +1,13 @@
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+body {
+    background: linear-gradient(#4913a5 0%, #7f0b94 33%, #041c3b 66%, #01080E 100% );
+    /* Deixa o fundo fixo */
+    background-attachment: fixed; 
+    padding: 5%;
+}
+ 

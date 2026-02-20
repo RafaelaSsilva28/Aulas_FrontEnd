@@ -16,7 +16,7 @@ const Aula07 = () => {
       <MeuComponenteNomeado />
       <MeuComponenteNomeado2 />
       {/* <enderecoServidor /> */}
-      <Aula07_Perfil />
+      <Aula07_Perfil  foto="https://i.pinimg.com/1200x/f2/0f/47/f20f47650a0a8dec19b4e8e7c8b3735b.jpg" nome="Rafaela"/>
     </div>
   );
 };
