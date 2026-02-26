@@ -5,7 +5,7 @@ const Game = () => {
     const [numeroSecreto, setNumeroSereto] = useState(sortearNumero)
     const [chute, setChute] = useState('')
     const [mensagem, setMensagem] = useState('Adivinhe um numero entre 1 e 100')
-    const [tentativas, setTentativas] = useState('1')
+    const [tentativas, setTentativas] = useState(1)
     const [JogoFinalizado, setJogoFinalizado] = useState(false)
 
     function sortearNumero(){
