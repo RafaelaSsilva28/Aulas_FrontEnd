@@ -1,10 +1,17 @@
-const Aula09_Nome = ({nome, index, excluir}) =>{
-    return(
-    <p >{nome}
-    <button onClick={excluir}>EXCLUIR</button>
-    </p>
 
-    )
+function Aula09_Nome({ index, pessoa, botaoExcluir }) {
+  return (
+    <div>
+      <p>
+         {pessoa}
+      </p>
+
+      <button onClick={() => botaoExcluir(index)}>
+        Excluir
+      </button>
+    </div>
+  );
 }
+
 
 export default Aula09_Nome

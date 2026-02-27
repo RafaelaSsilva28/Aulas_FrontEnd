@@ -44,8 +44,9 @@ const Aula09 = () => {
                     <Aula07_Perfil key={index} nome={perfil.nome} foto={perfil.foto} />
                 ))
             }
-                <Aula09_ListaNomes />
             </div>
+            
+            <Aula09_ListaNomes />
 
         </div>
     )

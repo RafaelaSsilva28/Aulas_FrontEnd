@@ -1,41 +1,53 @@
-import {  useState  } from "react"
+import { useState } from "react";
 import { estilos } from "../style/Estilos"
 import Aula09_Nome from "./Aula09_Nome";
 
+function Aula09_ListaNomes() {
 
-const Aula09_ListaNomes = () => {
-    const [listaPresenca, setListaPresenca] = useState([])
+  //variavel de estado 
+  const [listaPresenca, setListaPresenca] = useState([]);
+  const [nome, setNome] = useState('');
+
+  function botaoAdicionar() {
+        setListaPresenca([...listaPresenca, nome]);  //spreed... pega tudo que tem do vetor atual e coloca aqui dentro
+        console.log(listaPresenca);
+        
+  }
 
 
-    function botaoSortear() {
-        const novosNome = Math.floor(Math.random()* 60) + 1
-        setListaPresenca([...listaPresenca, novosNome])
-    }
+  function limparLista() {
+    setListaPresenca([]);
+  }
 
-    function botaoExcluir(nm) {
-        const novosNome = listaPresenca.filter( (nome) => nome != nm)
-        setListaPresenca( novosNome )
-    }
-    
-    return(
-        <div style={estilos.cardAula}>
-            <h1>Lista de Presença do Churrasco</h1>
-            <input type="text" onChange={nome} />
-            <button></button>
-            <hr />
-            
-             <button onClick={botaoLimpar} >LIMPAR</button>  
+  return (
+    <div style={estilos.cardAula}>
+      <h1>Lista de Presença do Churrasco</h1>
 
-            <h3>Lista de nomes sorteados:</h3>
-            {/* A função map é como o for para arrays/vetores */}
-            {
-                listaPresenca.map(  (nome, index) => (
-                    <Aula09_Nome key={index} nome={nome} excluir={() => botaoExcluir(nome)} />
-                ) )
-            }
-            
+      <input
+        type="text"
+        placeholder="Digite seu nome e o que vai levar"
+        onChange={(event) => setNome(event.target.value)} value={nome}  //cada tecla digitada atualiza o nome
+/>
 
-        </div>
-    )
-};
+      <button onClick={botaoAdicionar}>
+        Adicionar
+      </button>
+
+      {listaPresenca.map((pessoa, index) => (  //index numero
+        <Aula09_Nome
+          key={index}
+          pessoa={pessoa}
+          excluir={botaoExcluir}
+          
+        />
+      ))}
+
+      <button onClick={limparLista}>
+        Limpar Lista
+      </button>
+
+    </div>
+  );
+}
+
 export default Aula09_ListaNomes;
