@@ -8,6 +8,8 @@ import Aula07 from "./components/Aula07";
 import Aula08 from "./components/Aula08";
 import Aula09 from "./components/Aula09";
 import Aula10 from "./components/Aula10";
+import Aula11 from "./components/Aula11";
+import Aula12 from "./components/Aula12";
 import Cabecalho from "./components/Cabecalho";
 
 import { estilos } from "./style/Estilos";
@@ -30,6 +32,8 @@ const App = () => {
           <Aula08 />
           <Aula09 />
           <Aula10 />
+          <Aula11 />
+          <Aula12 />
         </div>
       </main>
     </div>
