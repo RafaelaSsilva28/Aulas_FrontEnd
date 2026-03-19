@@ -10,6 +10,7 @@ import Aula09 from "./components/Aula09";
 import Aula10 from "./components/Aula10";
 import Aula11 from "./components/Aula11";
 import Aula12 from "./components/Aula12";
+import Aula13 from "./components/Aula13";
 import Cabecalho from "./components/Cabecalho";
 
 import { estilos } from "./style/Estilos";
@@ -34,6 +35,7 @@ const App = () => {
           <Aula10 />
           <Aula11 />
           <Aula12 />
+          <Aula13 />
         </div>
       </main>
     </div>
