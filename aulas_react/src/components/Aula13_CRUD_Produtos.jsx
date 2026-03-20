@@ -3,44 +3,45 @@ import Aula13_Produto from "./Aula13_Produto"
 
 const Aula13_CRUD_Produtos = () => {
     const [listaProdutos, setListaProdutos] = useState([])
-    const [nome, setNome] = useState('')
+    const [nome_produto, setNome] = useState('')
     const [preco, setPreco] = useState('')
     const [link_produto, setLinkProduto] = useState('')
     const [link_imagem, setLinkImagem] = useState('')
     const [categoria, setCategoria] = useState('')
-    const [frete, setFrete] = useState(false)
+    const [frete_gratis, setFrete] = useState(false)
     //criando variaveis de estado para alterar meu cadastro metodo PUT
     const [editando, setEditando] = useState(false)
     const [id, setId] = useState('')
 
     //função para carregar meus dados
     function botaoAlterar(produto){ //essa function recebe um objeto com todos os dados do produto
-        setNome(produto.nome) //quando clicar no botao alterar vai alterar o nome
+        setNome(produto.nome_produto) //quando clicar no botao alterar vai alterar o nome
         setPreco(produto.preco)
         setLinkProduto(produto.link_produto)
         setLinkImagem(produto.link_imagem)
         setCategoria(produto.categoria)
-        setFrete(produto.frete)
+        setFrete(produto.frete_gratis)
         setEditando(true)
         setId(produto.id_produto)
     }
 
     async function botaoAdicionar() {
         const novoProduto = {
-            nome: nome,
+            nome_produto: nome_produto,
             preco: preco,
             link_produto: link_produto,
             link_imagem: link_imagem,
             categoria: categoria,
-            frete: frete
+            frete_gratis: frete_gratis
         }
             
         try {
-            let endpoint = 'http://10.130.42.68:3001/produtos';
+            let endpoint = 'http://localhost:3000/produtos';
             let metodo = 'POST';
 
             if (editando == true) {
-                endpoint = `http://10.130.42.68:3001/produtos/${id}`
+                endpoint = `http://localhost:3000/produtos/${id}`
+                //endpoint = `http://10.130.42.68:3001/produtos/${id}`
                 metodo = 'PUT'
             }
 
@@ -70,7 +71,9 @@ const Aula13_CRUD_Produtos = () => {
             //botão POST
             if (!window.confirm('Você tem certeza que deseja excluir?')) return
         try {
-            const resposta = await fetch(`http://10.130.42.68:3001/produtos/${id_produto}`, {
+            const resposta = await fetch(`http://localhost:3000/produtos/${id_produto}`, {
+                //const resposta = await fetch(`http://10.130.42.68:3001/produtos/${id_produto}`, {
+
                 method:  'DELETE', //mandando o metodo post para diferenciar do metodo GET que é como padrão
                 
             }) 
@@ -105,7 +108,7 @@ const Aula13_CRUD_Produtos = () => {
     //function buscar dados
     async function buscarDados() {
         try{
-            const resposta = await fetch('http://10.130.42.68:3001/produtos')
+            const resposta = await fetch('http://localhost:3000/produtos')
             const dados =await resposta.json()
             setListaProdutos(dados)
         } catch (erro) {
@@ -118,7 +121,7 @@ const Aula13_CRUD_Produtos = () => {
         <div>
             <h1>Cadastro de Produtos</h1>
             <div style={{ display: "flex", flexDirection: 'column', gap: 10 }}>
-                <input type="text" placeholder="Nome" style={estilos.inputs} value={nome}
+                <input type="text" placeholder="Nome" style={estilos.inputs} value={nome_produto}
                     onChange={(event) => setNome(event.target.value)} />
                 <input type="number" placeholder="Preço" style={estilos.inputs} value={preco}
                     onChange={(event) => setPreco(event.target.value)} />
@@ -132,7 +135,7 @@ const Aula13_CRUD_Produtos = () => {
                     <option value='Brinquedos'>Brinquedos</option>
                     <option value='Livros'>Livros</option>
                 </select>
-                <span> <input type="checkbox" checked={frete}
+                <span> <input type="checkbox" checked={frete_gratis}
                     onChange={(event) => setFrete(event.target.value)} />  Frete Grátis </span>
                 <button  style={estilos.botao} onClick={botaoAdicionar}>{editando == false ? "Adicionar produto" : "Editar Produto"}</button>
                 {
