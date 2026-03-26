@@ -16,7 +16,7 @@ import Aula13 from "../components/Aula13";
 import Aula14 from "../components/Aula14";
 import Cabecalho from "../components/Cabecalho";
 
-import { estilos } from "./style/Estilos";
+import { estilos } from  "../style/Estilos";
 
 const Principal = () => {
   return (
