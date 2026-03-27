@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import Aula13_Usuario from "./Aula13_Usuario"
+import { enderecoServidor } from '../utils'
 
 const Aula13_CRUD_Usuarios = () => {
     const [listaUsuarios, setListaUsuarios] = useState([])
@@ -28,11 +29,11 @@ const Aula13_CRUD_Usuarios = () => {
 
              //botão POST utilizando uma outra API
         try {
-            let endpoint = 'http://10.130.42.68:3001/usuarios';
+            let endpoint = `${enderecoServidor}/usuarios`;
             let metodo = 'POST';
 
             if (editando == true) {
-                endpoint = `http://10.130.42.68:3001/usuarios/${id}`
+                endpoint = `${enderecoServidor}/usuarios/${id}`
                 metodo = 'PUT'
             }
             const resposta = await fetch(endpoint, {
@@ -71,7 +72,7 @@ const Aula13_CRUD_Usuarios = () => {
             //botão POST
         try {
             
-            const resposta = await fetch(`http://10.130.42.68:3001/usuarios/${id_usuario}`, {
+            const resposta = await fetch(`${enderecoServidor}/usuarios/${id_usuario}`, {
                 method:  'DELETE', //mandando o metodo post para diferenciar do metodo GET que é como padrão
                 
             }) 
@@ -93,7 +94,7 @@ const Aula13_CRUD_Usuarios = () => {
     //function buscar dados da API
     async function buscarDados() {
         try{
-            const resposta = await fetch('http://10.130.42.68:3001/usuarios')
+            const resposta = await fetch(`${enderecoServidor}/usuarios`)
             const dados =await resposta.json()
             setListaUsuarios(dados)
         } catch (erro) {

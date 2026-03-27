@@ -3,117 +3,113 @@ import Aula13_Produto from "./Aula13_Produto"
 
 const Aula13_CRUD_Produtos = () => {
     const [listaProdutos, setListaProdutos] = useState([])
-    const [nome_produto, setNome] = useState('')
+    const [nome, setNome] = useState('')
     const [preco, setPreco] = useState('')
-    const [link_produto, setLinkProduto] = useState('')
-    const [link_imagem, setLinkImagem] = useState('')
+    const [linkProduto, setLinkProduto] = useState('')
+    const [linkImagem, setLinkImagem] = useState('')
     const [categoria, setCategoria] = useState('')
-    const [frete_gratis, setFrete] = useState(false)
-    //criando variaveis de estado para alterar meu cadastro metodo PUT
+    const [freteGratis, setFreteGratis] = useState(false)
+    //Criando variaveis de estado para alterar meu cadastro
     const [editando, setEditando] = useState(false)
     const [id, setId] = useState('')
 
-    //função para carregar meus dados
-    function botaoAlterar(produto){ //essa function recebe um objeto com todos os dados do produto
-        setNome(produto.nome_produto) //quando clicar no botao alterar vai alterar o nome
+    //Função para carregar meus dados
+    //Esta função recebe um objeto com todos os dados do produto
+    function botaoAlterar(produto) {
+        setNome(produto.nome)
         setPreco(produto.preco)
         setLinkProduto(produto.link_produto)
         setLinkImagem(produto.link_imagem)
         setCategoria(produto.categoria)
-        setFrete(produto.frete_gratis)
+        setFreteGratis(produto.frete)
         setEditando(true)
         setId(produto.id_produto)
     }
 
+    //const botaoAdicionar = async () {
     async function botaoAdicionar() {
         const novoProduto = {
-            nome_produto: nome_produto,
+            nome: nome,
             preco: preco,
-            link_produto: link_produto,
-            link_imagem: link_imagem,
+            link_produto: linkProduto,
+            link_imagem: linkImagem,
             categoria: categoria,
-            frete_gratis: frete_gratis
+            frete: freteGratis
         }
-            
-        try {
-            let endpoint = 'http://localhost:3000/produtos';
-            let metodo = 'POST';
 
-            if (editando == true) {
-                endpoint = `http://localhost:3000/produtos/${id}`
-                //endpoint = `http://10.130.42.68:3001/produtos/${id}`
+        try {
+            let endpoint = 'http://10.130.42.68:3001/produtos'
+            let metodo = 'POST'
+
+            if (editando == true){
+                endpoint = `http://10.130.42.68:3001/produtos/${id}`
                 metodo = 'PUT'
             }
 
-            //botão POST
             const resposta = await fetch(endpoint, {
-                method:  metodo, //mandando o metodo post para diferenciar do metodo GET que é como padrão
+                method: metodo,
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(novoProduto)
-            }) //mandando um objeto como parametro
+            })
 
-            if (!resposta.ok) {  //se der algum erro na resposta : 
-                throw new Error('Erro ao adicionar produto: ' + resposta)
+            if (!resposta.ok) {
+                throw new Error('Erro ao adicionar produto: ' + resposta.statusText)
             }
 
             buscarDados()
             LimparCamposFormularios()
 
         } catch (erro) {
-            console.error('Erro ao adicionar produto', erro.message)
+            console.error ( 'Erro ao adicionar produto', erro.message )
         }
     }
-//BOTÃO EXCLUIR
+
     async function botaoExcluir(id_produto) {
-        
-            //botão POST
-            if (!window.confirm('Você tem certeza que deseja excluir?')) return
+
+        if (!window.confirm('Você tem certeza que deseja excluir?')) return
+
         try {
-            const resposta = await fetch(`http://localhost:3000/produtos/${id_produto}`, {
-                //const resposta = await fetch(`http://10.130.42.68:3001/produtos/${id_produto}`, {
+            const resposta = await fetch(`http://10.130.42.68:3001/produtos/${id_produto}`, {
+                method: 'DELETE'
+            })
 
-                method:  'DELETE', //mandando o metodo post para diferenciar do metodo GET que é como padrão
-                
-            }) 
-
-            if (!resposta.ok) {  //se der algum erro na resposta : 
-                throw new Error('Erro ao adicionar produto: ' + resposta.statusText)
+            if (!resposta.ok) {
+                throw new Error('Erro ao excluir produto: ' + resposta.statusText)
             }
 
             buscarDados()
 
         } catch (erro) {
-            console.error('Erro ao adicionar produto', erro.message)
+            console.error ( 'Erro ao adicionar produto', erro.message )
         }
     }
-    //function com campos para reutilizar a função
-    function LimparCamposFormularios(){
+
+    function LimparCamposFormularios (){
         setNome('')
         setPreco('')
         setLinkProduto('')
         setLinkImagem('')
         setCategoria('')
-        setFrete(false)
+        setFreteGratis(false)
         setEditando(false)
         setId('')
-
     }
 
     useEffect(() => {
         buscarDados()
     }, [])
 
-    //function buscar dados
+    //Função para buscar os dados de uma API
     async function buscarDados() {
-        try{
-            const resposta = await fetch('http://localhost:3000/produtos')
-            const dados =await resposta.json()
+        try {
+            const resposta = await fetch('http://10.130.42.68:3001/produtos')
+            const dados = await resposta.json()
             setListaProdutos(dados)
+
         } catch (erro) {
-            console.error('Erroao  carregar os dados', erro.message)
-            
+            console.error ('Erro ao carregar os dados', erro.message)
         }
     }
 
@@ -121,13 +117,13 @@ const Aula13_CRUD_Produtos = () => {
         <div>
             <h1>Cadastro de Produtos</h1>
             <div style={{ display: "flex", flexDirection: 'column', gap: 10 }}>
-                <input type="text" placeholder="Nome" style={estilos.inputs} value={nome_produto}
+                <input type="text" placeholder="Nome" style={estilos.inputs} value={nome}
                     onChange={(event) => setNome(event.target.value)} />
                 <input type="number" placeholder="Preço" style={estilos.inputs} value={preco}
                     onChange={(event) => setPreco(event.target.value)} />
-                <input type="text" placeholder="Link do Produto" style={estilos.inputs} value={link_produto}
+                <input type="text" placeholder="Link do Produto" style={estilos.inputs} value={linkProduto}
                     onChange={(event) => setLinkProduto(event.target.value)} />
-                <input type="text" placeholder="Link da foto" style={estilos.inputs} value={link_imagem}
+                <input type="text" placeholder="Link da foto" style={estilos.inputs} value={linkImagem}
                     onChange={(event) => setLinkImagem(event.target.value)} />
                 <select  style={estilos.inputs} value={categoria} onChange={(event) => setCategoria(event.target.value)}>
                     <option value=''>Selecione uma categoria</option>
@@ -135,18 +131,21 @@ const Aula13_CRUD_Produtos = () => {
                     <option value='Brinquedos'>Brinquedos</option>
                     <option value='Livros'>Livros</option>
                 </select>
-                <span> <input type="checkbox" checked={frete_gratis}
-                    onChange={(event) => setFrete(event.target.value)} />  Frete Grátis </span>
-                <button  style={estilos.botao} onClick={botaoAdicionar}>{editando == false ? "Adicionar produto" : "Editar Produto"}</button>
+                <span> <input type="checkbox" checked={freteGratis}
+                    onChange={(event) => setFreteGratis(event.target.value)} />  Frete Grátis </span>
+                <button  style={estilos.botao} onClick={botaoAdicionar}>
+                    { editando == false ? "Adicionar Produto" : "Editar Produto"  } 
+                </button>
                 {
-                    editando == true && <button style={estilos.botao} onClick={LimparCamposFormularios}>Cancelar</button>
+                    editando == true && 
+                        <button style={estilos.botao} onClick={LimparCamposFormularios}>Cancelar</button>
                 }
+
                 <hr />
                 <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }} >
                     {
                         listaProdutos.map((produto, pos) => (
-                            <Aula13_Produto key={pos} produto={produto} botaoExcluir={botaoExcluir} botaoAlterar={botaoAlterar} /> //mandando as function
-                                                                                            //desse arquivo para outro
+                            <Aula13_Produto key={pos} produto={produto} botaoExcluir={botaoExcluir} botaoAlterar={botaoAlterar} />
                         ))
                     }
                 </div>
